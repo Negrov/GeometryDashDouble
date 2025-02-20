@@ -1,8 +1,9 @@
 import sys
 import pygame as pg
-from tools import load_music, paste_image
+
+from tools.tools import load_music, paste_image
 from scenes.scene import Scene
-from Assets.game_objects import Button, Background, Platform, GameObject
+from Assets.game_objects import Button, Background, GameObject
 
 
 class MenuScene(Scene):
@@ -12,7 +13,7 @@ class MenuScene(Scene):
         self._buttons: list[Button] =  []
         self._all_sprite = pg.sprite.Group()
         self._background = Background(window_size, 'menu/icons/background.png')
-        self._platforms = Platform('menu/icons/platform.png', window_size)
+#         self._platforms = Platform('menu/icons/platform.png', window_size)
         self._start_button = Button(self._all_sprite, 'menu/icons/start_button.png', (window_size[1] // 3, window_size[1] // 3), window_size, (window_size[0] // 2, window_size[1] // 2), 'open_levels_menu')
         load_music('menu\sounds\menuLoop.mp3')
         pg.mixer.music.play(-1)
@@ -22,7 +23,7 @@ class MenuScene(Scene):
 
     def init_ui(self) -> None:
         self._objects.append(self._background)
-        self._objects.append(self._platforms)
+#         self._objects.append(self._platforms)
         self._objects.append(self._start_button)
         self._buttons.append(self._start_button)
 
@@ -33,7 +34,7 @@ class MenuScene(Scene):
         self._color = (self._color + 1) if self._color <= 1529 else 0
         self._scene.fill(self.color(self._color))
         self._scene.blit(self._background, (0, 0))
-        self._scene.blit(self._platforms, (0, self._window_size[1] - self._platforms.side_size))
+#         self._scene.blit(self._platforms, (0, self._window_size[1] - self._platforms.side_size))
         paste_image(self._scene, 'menu/icons/geometry_dash.png', (800, 800 // 6), (0, 0))
         self._all_sprite.draw(self._scene)
 
